@@ -1,7 +1,12 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.0
+
 workflows:
   node-tests:
     jobs:
-      - node/test
+      build:
+        docker:
+          image: un1que1d/sample_nodejs:0.1
+          auth:
+            username: un1que1d
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          
