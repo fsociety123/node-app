@@ -1,12 +1,19 @@
 version: 2.1
 
-workflows:
-  node-tests:
-    jobs:
-      build:
-        docker:
-          image: un1que1d/sample_nodejs:0.1
-          auth:
-            username: un1que1d
-            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+executors:
+  my-executor:
+    docker:
+      - image: un1que1d/sample_nodejs:0.1
+        auth:
+          username: un1que1d
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+jobs:
+  build:
+    executor: my-executor
+    steps:
+      - run:
+            shell: /bin/sh
+            command: echo Outside the executor 
+          
           
