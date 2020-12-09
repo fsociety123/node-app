@@ -2,18 +2,16 @@ version: 2.1
 
 executors:
   my-executor:
-    docker:
-      - image: un1que1d/sample_nodejs:0.1
-        auth:
-          username: un1que1d
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    machine:
+      - image: ubuntu-2004:202010-01
 
 jobs:
   build:
     executor: my-executor
     steps:
+      - checkout
       - run:
             shell: /bin/sh
-            command: echo Outside the executor 
+            command: docker build -t sample-nodejs-app . 
           
           
